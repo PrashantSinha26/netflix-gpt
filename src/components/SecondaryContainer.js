@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 
 const SecondaryContainer = () => {
   const movies = useSelector((store) => store.movies);
-  console.log("ps1", movies);
   return (
     movies.nowPlayingMovies && (
       <div className="w-screen bg-black">

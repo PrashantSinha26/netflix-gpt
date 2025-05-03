@@ -12,12 +12,11 @@ const useNowPlayingMovies = () => {
       API_OPTIONS,
     );
     const json = await data.json();
-    console.log("ps4", json);
     dispatch(addNowPlayingMovies(json.results));
   };
 
   useEffect(() => {
-    console.log("ps3");
+
     getNowPlayingMovies();
   }, []);
 };

@@ -36,7 +36,9 @@
 - TMDB image CDN
 - use popularMovies custom hook
 - GPT search feature
-- 
+- GPT Search bar
+- (*) Added Multi-Language Feature
+- Intregate GPT API's
 
 # Features
 

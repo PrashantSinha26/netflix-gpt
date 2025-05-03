@@ -1,14 +1,18 @@
+import { useSelector } from "react-redux";
+import lang from "../utils/languageContants";
+
 const GptSearchBar = () => {
+  const langKey = useSelector((store) => store.config.lang);
   return (
-    <div>
-      <form className="m-6 bg-black p-6">
+    <div className="flex justify-center pt-[15%]">
+      <form className="grid w-1/2 grid-cols-12 bg-black">
         <input
           type="text"
-          className="m-4 p-4 bg-white"
-          placeholder="What's movie are you looking for...!"
+          className="col-span-9 m-4 rounded-lg bg-white p-4"
+          placeholder={lang[langKey].gptSearchPlaceholder}
         />
-        <button className="cursor-pointer rounded-lg bg-red-700 px-4 py-2 text-white">
-          Search
+        <button className="col-span-3 m-4 cursor-pointer rounded-lg bg-red-700 px-4 py-2 text-white">
+          {lang[langKey].search}
         </button>
       </form>
     </div>
