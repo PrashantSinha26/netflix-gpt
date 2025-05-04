@@ -12,7 +12,6 @@ const GptSearchBar = () => {
       apiKey: "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",
       dangerouslyAllowBrowser: true,
     });
-    console.log(searchText.current.value);
     //Make an API call to GPT AI and get the movie result
 
     
