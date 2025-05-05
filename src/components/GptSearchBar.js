@@ -24,7 +24,7 @@ const GptSearchBar = () => {
 
   const handleGptSearchClick = async () => {
     const groq = new Groq({
-      apiKey: "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",
+      apiKey: process.env.REACT_APP_GROQ_SEARCH_KEY,
       dangerouslyAllowBrowser: true,
     });
     //Make an API call to GPT AI and get the movie result
@@ -43,7 +43,6 @@ const GptSearchBar = () => {
       ],
       model: "llama-3.3-70b-versatile", // Example model, choose one available
     });
-    console.log(response.choices[0]?.message?.content);
     //     const response = await client.responses.create({
     //   model: 'gpt-4o-mini',
     //   instructions: 'You are a coding assistant that talks like a pirate',
@@ -53,13 +52,11 @@ const GptSearchBar = () => {
       (match) => match[1],
     );
 
-    console.log(gptMovies);
 
     const promiseArray = gptMovies.map((movie) => searchMovieTMDB(movie));
 
     const tmdbResults = await Promise.all(promiseArray);
 
-    console.log(promiseArray);
 
     dispatch(
       addGptMovieResult({ movieNames: gptMovies, movieResults: tmdbResults }),
