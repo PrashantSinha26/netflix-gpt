@@ -1,25 +1,40 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import lang from "../utils/languageContants";
 import { useRef } from "react";
 import Groq from "groq-sdk";
+import { API_OPTIONS } from "../utils/constants";
+import { addGptMovieResult } from "../utils/gptSlice";
 
 const GptSearchBar = () => {
+  const dispatch = useDispatch();
   const langKey = useSelector((store) => store.config.lang);
   const searchText = useRef(null);
 
-  const handleGptSearchClick = async() => {
+  const searchMovieTMDB = async (movie) => {
+    const data = await fetch(
+      "https://api.themoviedb.org/3/search/movie?query" +
+        movie +
+        "&include_adult=false&language=en-US&page=1",
+      API_OPTIONS,
+    );
+    const json = await data.json();
+
+    return json.results;
+  };
+
+  const handleGptSearchClick = async () => {
     const groq = new Groq({
       apiKey: "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",
       dangerouslyAllowBrowser: true,
     });
     //Make an API call to GPT AI and get the movie result
 
-    
     const response = await groq.chat.completions.create({
       messages: [
         {
           role: "system",
-          content: "You are a best movie recommendation AI system. Give only 5 best movies",
+          content:
+            "You are a best movie recommendation AI system. Give only 5 best movies",
         },
         {
           role: "user",
@@ -28,14 +43,22 @@ const GptSearchBar = () => {
       ],
       model: "llama-3.3-70b-versatile", // Example model, choose one available
     });
-    console.log(response.choices[0]?.message?.content);
-//     const response = await client.responses.create({
-//   model: 'gpt-4o-mini',
-//   instructions: 'You are a coding assistant that talks like a pirate',
-//   input: 'Are semicolons optional in JavaScript?',
-// });
+    console.log(response.choices?.[0]?.message?.content);
+    //     const response = await client.responses.create({
+    //   model: 'gpt-4o-mini',
+    //   instructions: 'You are a coding assistant that talks like a pirate',
+    //   input: 'Are semicolons optional in JavaScript?',
+    // });
+    const gptMovies = response.choices?.[0]?.message?.content.split(",");
 
+    const promiseArray = gptMovies.map((movie) => searchMovieTMDB(movie));
+
+    const tmdbResults = await Promise.all(promiseArray);
+    console.log(tmdbResults);
+
+    dispatch(addGptMovieResult({movieNames: gptMovies,movieResults:tmdbResults}));
   };
+
   return (
     <div className="flex justify-center pt-[15%]">
       <form
