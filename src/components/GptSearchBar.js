@@ -12,7 +12,7 @@ const GptSearchBar = () => {
 
   const searchMovieTMDB = async (movie) => {
     const data = await fetch(
-      "https://api.themoviedb.org/3/search/movie?query" +
+      "https://api.themoviedb.org/3/search/movie?query=" +
         movie +
         "&include_adult=false&language=en-US&page=1",
       API_OPTIONS,
@@ -43,20 +43,27 @@ const GptSearchBar = () => {
       ],
       model: "llama-3.3-70b-versatile", // Example model, choose one available
     });
-    console.log(response.choices?.[0]?.message?.content);
+    console.log(response.choices[0]?.message?.content);
     //     const response = await client.responses.create({
     //   model: 'gpt-4o-mini',
     //   instructions: 'You are a coding assistant that talks like a pirate',
     //   input: 'Are semicolons optional in JavaScript?',
     // });
-    const gptMovies = response.choices?.[0]?.message?.content.split(",");
+    const gptMovies = [...response.choices[0]?.message?.content.matchAll(/\*\*(.*?) \(\d{4}\)\*\*/g)].map(
+      (match) => match[1],
+    );
+
+    console.log(gptMovies);
 
     const promiseArray = gptMovies.map((movie) => searchMovieTMDB(movie));
 
     const tmdbResults = await Promise.all(promiseArray);
-    console.log(tmdbResults);
 
-    dispatch(addGptMovieResult({movieNames: gptMovies,movieResults:tmdbResults}));
+    console.log(promiseArray);
+
+    dispatch(
+      addGptMovieResult({ movieNames: gptMovies, movieResults: tmdbResults }),
+    );
   };
 
   return (

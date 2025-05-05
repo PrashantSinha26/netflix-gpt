@@ -8,8 +8,7 @@ export const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyODI4OWY0ZGNmMTdjZGYxZGExNDU3ZTZlMGQzMGRjZCIsIm5iZiI6MTc0MzUzNTExMC45Njk5OTk4LCJzdWIiOiI2N2VjM2MwNmM1NDQyMzNkOGYyZmM4NTIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.gq3jcGXpQS0Z2NbqfB0ShM5gFTr9LnCI2Ne6DC0IuoE",
+    Authorization: "Bearer " + process.env.REACT_APP_TMDB_KEY,
   },
 };
 
@@ -24,7 +23,7 @@ export const SUPPORTED_LANGUAGES = [
   { identifer: "german", name: "German" },
 ];
 
-export const GROQ_API_KEY = "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";
+export const GROQ_API_KEY = process.env.REACT_APP_GROQ_API_KEY;
 
 // export const OPENAI_KEY =
 //   "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";
