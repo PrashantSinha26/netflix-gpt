@@ -24,6 +24,3 @@ export const SUPPORTED_LANGUAGES = [
 ];
 
 export const GROQ_API_KEY = process.env.REACT_APP_GROQ_API_KEY;
-
-// export const OPENAI_KEY =
-//   "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";
