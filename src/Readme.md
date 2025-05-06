@@ -38,7 +38,15 @@
 - GPT search feature
 - GPT Search bar
 - (*) Added Multi-Language Feature
-- Intregate GPT API's
+- Get OpenAI key
+- GPT search API call
+- Fetch GPT movies suggestion from TMDB 
+- created GPT Slice and added data 
+- Reused MoviesList 
+- Memoztiation
+- Added .env file 
+- Make site responsive(mobile, laptop)
+
 
 # Features
 

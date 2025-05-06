@@ -57,10 +57,10 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute z-10 flex w-screen justify-between bg-gradient-to-b from-black px-8 py-2">
-      <img className="w-44" src={LOGO} alt="Logo" />
+    <div className="absolute z-10 flex w-screen flex-col justify-between bg-gradient-to-b from-black px-8 py-2 md:flex-row">
+      <img className="mx-auto w-44 md:mx-0" src={LOGO} alt="Logo" />
       {user && (
-        <div className="flex p-2">
+        <div className="flex p-2 justify-between">
           {showGptSearch && (
             <select
               className="m-2 rounded-lg bg-gray-700 p-2 text-white"
@@ -74,13 +74,13 @@ const Header = () => {
             </select>
           )}
           <button
-            className="mx-5 my-2 cursor-pointer rounded-lg bg-purple-900 px-4 py-2 text-white"
+            className="mx-3 md:mx-5 my-0 md:my-2 cursor-pointer rounded-lg bg-purple-900 px-4 py-0 md:py-2 text-white"
             onClick={handleGptSearchClick}
           >
             {showGptSearch ? "Homepage" : "GPT Search"}
           </button>
           <img
-            className="h-12 w-12"
+            className="hidden md:blocks h-12 w-12"
             alt="usericon"
             src="https://occ-0-2464-3647.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABXYofKdCJceEP7pdxcEZ9wt80GsxEyXIbnG_QM8znksNz3JexvRbDLr0_AcNKr2SJtT-MLr1eCOA-e7xlDHsx4Jmmsi5HL8.png?r=1d4"
           />
