@@ -99,10 +99,14 @@ const Login = () => {
     setIsSignInForm(!isSignInForm);
   };
   return (
-    <div >
+    <div>
       <Header />
-      <div className="absolute">
-        <img className="h-screen object-cover" src={BG_URL} alt="Bg_Logo" />
+      <div className="absolute w-full">
+        <img
+          className="h-screen w-full object-cover"
+          src={BG_URL}
+          alt="Bg_Logo"
+        />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
